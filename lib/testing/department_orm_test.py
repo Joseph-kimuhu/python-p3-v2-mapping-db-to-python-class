@@ -1,5 +1,18 @@
-from __init__ import CONN, CURSOR
-from department import Department
+import sys
+import os
+
+# Add the lib directory to the path if not already there
+lib_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+if lib_path not in sys.path:
+    sys.path.insert(0, lib_path)
+
+try:
+    from __init__ import CONN, CURSOR
+    from department import Department
+except ImportError:
+    # If running from root directory
+    from lib import CONN, CURSOR
+    from lib.department import Department
 import pytest
 
 
